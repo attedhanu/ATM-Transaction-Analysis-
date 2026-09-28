@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Create Account</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+    <style>
+
+        .account-box {
+            width: 450px;
+            margin: 40px auto;
+            padding: 30px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .account-box h1 {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .account-box label {
+            display: block;
+            margin-top: 15px;
+            margin-bottom: 6px;
+            font-weight: bold;
+        }
+
+        .account-box input,
+        .account-box select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-sizing: border-box;
+        }
+
+        .account-button {
+            width: 100%;
+            margin-top: 25px;
+            padding: 13px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="main">
+
+    <div class="account-box">
+
+        <h1>👤 Create Account</h1>
+
+        <form method="POST">
+
+            <label>Name</label>
+
+            <input
+                type="text"
+                name="name"
+                placeholder="Enter your name"
+                required
+            >
+
+            <label>Mobile Number</label>
+
+            <input
+                type="text"
+                name="mobile"
+                placeholder="Enter mobile number"
+                required
+            >
+
+            <label>Email</label>
+
+            <input
+                type="email"
+                name="email"
+                placeholder="Enter your email"
+                required
+            >
+
+            <label>UPI ID</label>
+
+            <input
+                type="text"
+                name="upi_id"
+                placeholder="example@upi"
+                required
+            >
+
+            <label>Account Type</label>
+
+            <select name="account_type" required>
+
+                <option value="">
+                    Select Account Type
+                </option>
+
+                <option value="Savings Account">
+                    🏦 Savings Account
+                </option>
+
+                <option value="Current Account">
+                    💼 Current Account
+                </option>
+
+                <option value="Salary Account">
+                    💳 Salary Account
+                </option>
+
+                <option value="Student Account">
+                    🎓 Student Account
+                </option>
+
+                <option value="Business Account">
+                    🏢 Business Account
+                </option>
+
+            </select>
+
+            <label>Create PIN</label>
+
+            <input
+                type="password"
+                name="pin"
+                maxlength="4"
+                placeholder="Enter 4-digit PIN"
+                required
+            >
+
+            <label>Confirm PIN</label>
+
+            <input
+                type="password"
+                name="confirm_pin"
+                maxlength="4"
+                placeholder="Confirm 4-digit PIN"
+                required
+            >
+
+            <button
+                type="submit"
+                class="account-button">
+
+                CREATE ACCOUNT
+
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

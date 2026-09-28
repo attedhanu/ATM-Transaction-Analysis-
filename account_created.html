@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Account Created</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+    <style>
+
+        .success-box {
+            width: 450px;
+            margin: 60px auto;
+            padding: 30px;
+            background: white;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .success-box h1 {
+            margin-bottom: 25px;
+        }
+
+        .details {
+            text-align: left;
+            margin-top: 20px;
+            line-height: 2;
+        }
+
+        .home-button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 25px;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: bold;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="main">
+
+    <div class="success-box">
+
+        <h1>🎉 Account Created Successfully!</h1>
+
+        <h2>Welcome, {{ name }}!</h2>
+
+        <div class="details">
+
+            <p>
+                <b>Mobile:</b> {{ mobile }}
+            </p>
+
+            <p>
+                <b>Email:</b> {{ email }}
+            </p>
+
+            <p>
+                <b>UPI ID:</b> {{ upi_id }}
+            </p>
+
+            <p>
+                <b>Account Type:</b> {{ account_type }}
+            </p>
+
+        </div>
+
+        <a href="/" class="home-button">
+            🏠 Go to Dashboard
+        </a>
+
+        <br><br>
+
+        <a href="/send-money">
+            💰 Send Money
+        </a>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

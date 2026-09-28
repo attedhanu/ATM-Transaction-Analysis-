@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Payment History</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+    <style>
+
+        .history-box {
+            margin: 30px;
+            padding: 25px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .history-box h1 {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+            text-align: center;
+        }
+
+        th {
+            font-weight: bold;
+        }
+
+        .no-data {
+            text-align: center;
+            padding: 30px;
+            font-size: 18px;
+        }
+
+        .back-button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: bold;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="main">
+
+    <div class="history-box">
+
+        <h1>📜 Payment History</h1>
+
+        {% if records %}
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>Account Type</th>
+
+                    <th>Receiver UPI</th>
+
+                    <th>Amount</th>
+
+                    <th>Description</th>
+
+                    <th>Payment Method</th>
+
+                    <th>Date</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                {% for payment in records %}
+
+                <tr>
+
+                    <td>
+                        {{ payment.Account_Type }}
+                    </td>
+
+                    <td>
+                        {{ payment.Receiver_UPI }}
+                    </td>
+
+                    <td>
+                        ₹{{ payment.Amount }}
+                    </td>
+
+                    <td>
+                        {{ payment.Description }}
+                    </td>
+
+                    <td>
+                        {{ payment.Payment_Method }}
+                    </td>
+
+                    <td>
+                        {{ payment.Date }}
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+        {% else %}
+
+        <div class="no-data">
+
+            📭 No payment history available.
+
+        </div>
+
+        {% endif %}
+
+        <a href="/send-money" class="back-button">
+            💰 Send Money
+        </a>
+
+        <br><br>
+
+        <a href="/">
+            🏠 Dashboard
+        </a>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

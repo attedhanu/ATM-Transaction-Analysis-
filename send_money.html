@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Send Money</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+    <style>
+
+        .payment-box {
+            width: 450px;
+            margin: 40px auto;
+            padding: 30px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .payment-box h1 {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .payment-box label {
+            display: block;
+            margin-top: 15px;
+            margin-bottom: 6px;
+            font-weight: bold;
+        }
+
+        .payment-box input,
+        .payment-box select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-sizing: border-box;
+        }
+
+        .pay-button {
+            width: 100%;
+            margin-top: 25px;
+            padding: 13px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="main">
+
+    <div class="payment-box">
+
+        <h1>💰 Send Money</h1>
+
+        <form method="POST">
+
+
+            <!-- ACCOUNT TYPE -->
+
+            <label>Account Type</label>
+
+            <select name="account_type" required>
+
+                <option value="">
+                    Select Account Type
+                </option>
+
+                <option value="Savings Account">
+                    🏦 Savings Account
+                </option>
+
+                <option value="Current Account">
+                    💼 Current Account
+                </option>
+
+                <option value="Salary Account">
+                    💳 Salary Account
+                </option>
+
+                <option value="Student Account">
+                    🎓 Student Account
+                </option>
+
+                <option value="Business Account">
+                    🏢 Business Account
+                </option>
+
+            </select>
+
+
+            <!-- RECEIVER UPI -->
+
+            <label>Receiver UPI ID</label>
+
+            <input
+                type="text"
+                name="receiver_upi"
+                placeholder="example@upi"
+                required
+            >
+
+
+            <!-- AMOUNT -->
+
+            <label>Amount</label>
+
+            <input
+                type="number"
+                name="amount"
+                placeholder="Enter amount"
+                min="1"
+                step="0.01"
+                required
+            >
+
+
+            <!-- DESCRIPTION -->
+
+            <label>Description</label>
+
+            <input
+                type="text"
+                name="description"
+                placeholder="Example: Food, Shopping"
+            >
+
+
+            <!-- PAYMENT METHOD -->
+
+            <label>Payment Method</label>
+
+            <select name="payment_method" required>
+
+                <option value="UPI">
+                    UPI
+                </option>
+
+                <option value="ATM">
+                    ATM
+                </option>
+
+                <option value="Card">
+                    Card
+                </option>
+
+                <option value="Bank Transfer">
+                    Bank Transfer
+                </option>
+
+            </select>
+
+
+            <!-- PAY BUTTON -->
+
+            <button
+                type="submit"
+                class="pay-button">
+
+                PAY NOW
+
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>ATM Transactions</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+    <style>
+
+        /* Search area */
+
+        .search-box {
+            margin: 20px 0;
+        }
+
+        .search-box input {
+            width: 350px;
+            padding: 12px;
+
+            border: 1px solid #ccc;
+            border-radius: 6px;
+
+            font-size: 15px;
+        }
+
+        .search-box button {
+            padding: 12px 20px;
+
+            border: none;
+            border-radius: 6px;
+
+            background: #1f2937;
+            color: white;
+
+            cursor: pointer;
+        }
+
+        .search-box button:hover {
+            background: #374151;
+        }
+
+
+        /* Table */
+
+        .table-container {
+            background: white;
+
+            padding: 20px;
+
+            border-radius: 12px;
+
+            box-shadow:
+                0 2px 8px rgba(0, 0, 0, 0.08);
+
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+
+            border-collapse: collapse;
+
+            min-width: 1200px;
+        }
+
+        th {
+            background: #1f2937;
+
+            color: white;
+
+            padding: 12px;
+
+            text-align: left;
+        }
+
+        td {
+            padding: 10px;
+
+            border-bottom: 1px solid #ddd;
+        }
+
+        tr:hover {
+            background: #f5f5f5;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- ================= SIDEBAR ================= -->
+
+    <div class="sidebar">
+
+        <h2>ATM Analytics</h2>
+
+        <a href="/">
+            📊 Dashboard
+        </a>
+
+        <a href="/transactions">
+            💳 Transactions
+        </a>
+
+        <a href="/analytics">
+            📈 Analytics
+        </a>
+
+    </div>
+
+
+    <!-- ================= MAIN ================= -->
+
+    <div class="main">
+
+        <h1>ATM Transactions</h1>
+
+        <p class="subtitle">
+            View and search transaction records
+        </p>
+
+
+        <!-- ================= SEARCH ================= -->
+
+        <div class="search-box">
+
+            <form method="GET"
+                  action="/transactions">
+
+                <input
+                    type="text"
+                    name="search"
+                    placeholder="Search transactions..."
+                    value="{{ search }}"
+                >
+
+                <button type="submit">
+                    Search
+                </button>
+
+            </form>
+
+        </div>
+
+
+        <!-- ================= TABLE ================= -->
+
+        <div class="table-container">
+
+            {% if records %}
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        {% for column in columns %}
+
+                        <th>
+                            {{ column }}
+                        </th>
+
+                        {% endfor %}
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+                    {% for row in records %}
+
+                    <tr>
+
+                        {% for column in columns %}
+
+                        <td>
+                            {{ row[column] }}
+                        </td>
+
+                        {% endfor %}
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+            {% else %}
+
+            <p>
+                No transactions found.
+            </p>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+
+</body>
+
+</html>

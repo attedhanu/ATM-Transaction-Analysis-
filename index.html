@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>ATM Transaction Dashboard</title>
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+
+<body>
+
+    <!-- ================= SIDEBAR ================= -->
+
+    <div class="sidebar">
+
+        <h2>ATM Analytics</h2>
+
+        <a href="/">
+            📊 Dashboard
+        </a>
+
+        <a href="/create-account">
+            👤 Create Account
+        </a>
+
+        <a href="/send-money">
+            💰 Send Money
+        </a>
+
+        <a href="/payment-history">
+            📜 Payment History
+        </a>
+
+        <a href="/transactions">
+            💳 ATM Transactions
+        </a>
+
+        <a href="/analytics">
+            📈 Analytics
+        </a>
+
+    </div>
+
+
+    <!-- ================= MAIN CONTENT ================= -->
+
+    <div class="main">
+
+        <h1>ATM Transaction Dashboard</h1>
+
+        <p class="subtitle">
+            Analysis of ATM transaction data
+        </p>
+
+
+        <!-- ================= SUMMARY CARDS ================= -->
+
+        <div class="cards">
+
+
+            <!-- Total Transactions -->
+
+            <div class="card">
+
+                <h3>
+                    Total Transactions
+                </h3>
+
+                <p>
+                    {{ total_transactions }}
+                </p>
+
+            </div>
+
+
+            <!-- Total Amount -->
+
+            <div class="card">
+
+                <h3>
+                    Total Amount
+                </h3>
+
+                <p>
+                    ₹ {{ "%.2f"|format(total_amount) }}
+                </p>
+
+            </div>
+
+
+            <!-- Average Transaction -->
+
+            <div class="card">
+
+                <h3>
+                    Average Transaction
+                </h3>
+
+                <p>
+                    ₹ {{ "%.2f"|format(average_amount) }}
+                </p>
+
+            </div>
+
+
+            <!-- Debit -->
+
+            <div class="card">
+
+                <h3>
+                    Debit Transactions
+                </h3>
+
+                <p>
+                    {{ debit_count }}
+                </p>
+
+            </div>
+
+
+            <!-- Credit -->
+
+            <div class="card">
+
+                <h3>
+                    Credit Transactions
+                </h3>
+
+                <p>
+                    {{ credit_count }}
+                </p>
+
+            </div>
+
+
+            <!-- Login Attempts -->
+
+            <div class="card">
+
+                <h3>
+                    Multiple Login Attempts
+                </h3>
+
+                <p>
+                    {{ suspicious_count }}
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================= CHARTS ================= -->
+
+        <div class="charts">
+
+
+            <!-- CHANNEL -->
+
+            <div class="chart-box">
+
+                <h2>
+                    Transactions by Channel
+                </h2>
+
+                <canvas id="channelChart"></canvas>
+
+            </div>
+
+
+            <!-- TRANSACTION TYPE -->
+
+            <div class="chart-box">
+
+                <h2>
+                    Transaction Types
+                </h2>
+
+                <canvas id="typeChart"></canvas>
+
+            </div>
+
+
+            <!-- LOCATION -->
+
+            <div class="chart-box">
+
+                <h2>
+                    Top Transaction Locations
+                </h2>
+
+                <canvas id="locationChart"></canvas>
+
+            </div>
+
+
+            <!-- OCCUPATION -->
+
+            <div class="chart-box">
+
+                <h2>
+                    Customer Occupation
+                </h2>
+
+                <canvas id="occupationChart"></canvas>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= JAVASCRIPT ================= -->
+
+    <script>
+
+
+        // ==========================================
+        // CHANNEL CHART
+        // ==========================================
+
+        const channelData =
+            {{ channel_data | tojson }};
+
+
+        new Chart(
+            document.getElementById("channelChart"),
+            {
+
+                type: "doughnut",
+
+                data: {
+
+                    labels:
+                        Object.keys(channelData),
+
+                    datasets: [{
+
+                        data:
+                            Object.values(channelData)
+
+                    }]
+
+                }
+
+            }
+        );
+
+
+        // ==========================================
+        // TRANSACTION TYPE CHART
+        // ==========================================
+
+        const typeData =
+            {{ transaction_type_data | tojson }};
+
+
+        new Chart(
+            document.getElementById("typeChart"),
+            {
+
+                type: "bar",
+
+                data: {
+
+                    labels:
+                        Object.keys(typeData),
+
+                    datasets: [{
+
+                        label:
+                            "Transactions",
+
+                        data:
+                            Object.values(typeData)
+
+                    }]
+
+                },
+
+                options: {
+
+                    responsive: true,
+
+                    scales: {
+
+                        y: {
+
+                            beginAtZero: true
+
+                        }
+
+                    }
+
+                }
+
+            }
+        );
+
+
+        // ==========================================
+        // LOCATION CHART
+        // ==========================================
+
+        const locationData =
+            {{ location_data | tojson }};
+
+
+        new Chart(
+            document.getElementById("locationChart"),
+            {
+
+                type: "bar",
+
+                data: {
+
+                    labels:
+                        Object.keys(locationData),
+
+                    datasets: [{
+
+                        label:
+                            "Transactions",
+
+                        data:
+                            Object.values(locationData)
+
+                    }]
+
+                },
+
+                options: {
+
+                    indexAxis: "y",
+
+                    responsive: true,
+
+                    scales: {
+
+                        x: {
+
+                            beginAtZero: true
+
+                        }
+
+                    }
+
+                }
+
+            }
+        );
+
+
+        // ==========================================
+        // OCCUPATION CHART
+        // ==========================================
+
+        const occupationData =
+            {{ occupation_data | tojson }};
+
+
+        new Chart(
+            document.getElementById("occupationChart"),
+            {
+
+                type: "pie",
+
+                data: {
+
+                    labels:
+                        Object.keys(occupationData),
+
+                    datasets: [{
+
+                        data:
+                            Object.values(occupationData)
+
+                    }]
+
+                }
+
+            }
+        );
+
+    </script>
+
+
+</body>
+
+</html>

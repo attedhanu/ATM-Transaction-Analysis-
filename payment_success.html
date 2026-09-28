@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Payment Successful</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+    <style>
+
+        .success-box {
+            width: 450px;
+            margin: 60px auto;
+            padding: 35px;
+            background: white;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .success-icon {
+            font-size: 60px;
+            margin-bottom: 10px;
+        }
+
+        .success-box h1 {
+            margin-bottom: 25px;
+        }
+
+        .payment-details {
+            text-align: left;
+            line-height: 2;
+            margin-top: 20px;
+        }
+
+        .button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 20px;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: bold;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="main">
+
+    <div class="success-box">
+
+        <div class="success-icon">
+            ✅
+        </div>
+
+        <h1>Payment Successful!</h1>
+
+        <div class="payment-details">
+
+            <p>
+                <b>Receiver UPI:</b>
+                {{ receiver }}
+            </p>
+
+            <p>
+                <b>Amount:</b>
+                ₹{{ amount }}
+            </p>
+
+            <p>
+                <b>Date:</b>
+                {{ date }}
+            </p>
+
+        </div>
+
+        <a href="/send-money" class="button">
+            💰 Send Another Payment
+        </a>
+
+        <br><br>
+
+        <a href="/payment-history">
+            📜 View Payment History
+        </a>
+
+        <br><br>
+
+        <a href="/">
+            🏠 Dashboard
+        </a>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>
